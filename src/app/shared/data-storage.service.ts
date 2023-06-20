@@ -27,15 +27,11 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    return this.authService.user.pipe(take(1), exhaustMap(user => {
+   
       return this.http
       .get<Recipe[]>(
-        'https://angular-http-a91bb-default-rtdb.firebaseio.com/posts.json',
-        {
-          params: new HttpParams().set('auth', user._token)
-        }
-      );
-    }), 
+        'https://angular-http-a91bb-default-rtdb.firebaseio.com/posts.json'
+      ).pipe(
     map(recipes => {
       return recipes.map(recipe => {
         return {
